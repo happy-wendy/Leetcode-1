@@ -39,3 +39,13 @@ class Solution:
             for j in range(i+1):
                 res[i].append((res[i-1][j-1] if j>0 else 0) + (res[i-1][j] if j<i else 0))
         return res
+"""
+法三：map函数
+每一行的结果可以由上一行和上一行的偏移相加得到
+"""
+class Solution():
+    def generate(self, numRows):
+        res = [[1]]
+        for i in range(1, numRows):
+            res += [map(lambda x, y: x+y, res[-1] + [0], [0] + res[-1])]
+        return res[:numRows]
