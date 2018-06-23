@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-异或操作的定义为：x ^ 0 = x; x ^ x = 0。用在这道题里面就是：y ^ x ^ x = y; x ^ x = 0
+1.Iterate through all elements in \text{nums}nums
+2.Try if hash\_tablehash_table has the key for pop
+3.If not, set up key/value pair
+4.In the end, there is only one element in hash\_tablehash_table, so use popitem to get it
 """
 class Solution(object):
     def singleNumber(self, nums):
@@ -9,6 +12,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        hash_table = {}
+        for i in nums:
+            try:
+                hash_table.pop(i)
+            except:
+                hash_table[i] = 1
+        return hash_table.popitem()[0]
+"""
+异或操作的定义为：x ^ 0 = x; x ^ x = 0。用在这道题里面就是：y ^ x ^ x = y; x ^ x = 0
+"""
+class Solution(object):
+    def singleNumber(self, nums):
         res = 0
         for i in nums:
             res ^= i
